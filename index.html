@@ -7,7 +7,9 @@
     <title>Добавление элемента</title>
 </head>
 <body>
+    <!-- Добавлена ссылка на страницу с просмотром всех данных -->
     <a href="get.html">Посмотреть все данные</a>
+    
     <div class="container">
         <h1 class="mt-5">Добавить новый элемент</h1>
         <form id="itemForm">
@@ -35,7 +37,8 @@
             const coitem = document.getElementById('coitem').value;
             const itemDetails = document.getElementById('itemDetails').value;
 
-            fetch('http://127.0.0.1:5000/api/items', {
+            // Изменен URL на актуальный адрес Replit
+            fetch('https://a72c994c-4357-4a57-8651-ae7aed811d76-00-961jagjdatvf.janeway.replit.dev/api/items', {  // Изменен URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -45,6 +48,7 @@
             .then(response => response.json())
             .then(data => {
                 alert('Item added successfully');
+                document.getElementById('itemForm').reset();  // Очистка формы после отправки
             })
             .catch(error => {
                 console.error('Error:', error);

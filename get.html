@@ -7,7 +7,9 @@
     <title>Список данных</title>
 </head>
 <body>
+  <!-- Добавлена ссылка для возвращения к форме добавления данных -->
   <a href="index.html">Добавить данные</a>
+  
     <div class="container">
         <h1 class="mt-5">Список всех элементов</h1>
         <table class="table table-striped mt-3">
@@ -28,7 +30,8 @@
     <script>
         // Функция для получения всех элементов с сервера
         function fetchItems() {
-            fetch('http://127.0.0.1:5000/api/items')  // Меняй URL, если сервер Flask запущен на другом адресе или порту
+            // Изменение URL на актуальный адрес Replit-сервера
+            fetch('https://a72c994c-4357-4a57-8651-ae7aed811d76-00-961jagjdatvf.janeway.replit.dev/api/items')  // Изменен URL на актуальный для Replit
                 .then(response => response.json())
                 .then(data => {
                     const tableBody = document.getElementById('itemsTableBody');

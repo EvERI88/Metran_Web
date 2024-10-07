@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Список данных</title>
+</head>
+<body>
+  <a href="index.html">Добавить данные</a>
+    <div class="container">
+        <h1 class="mt-5">Список всех элементов</h1>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>CO</th>
+                    <th>CO Item</th>
+                    <th>Item Details</th>
+                </tr>
+            </thead>
+            <tbody id="itemsTableBody">
+                <!-- Здесь будут отображаться данные -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Функция для получения всех элементов с сервера
+        function fetchItems() {
+            fetch('http://127.0.0.1:5000/api/items')  // Меняй URL, если сервер Flask запущен на другом адресе или порту
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('itemsTableBody');
+                    tableBody.innerHTML = '';  // Очистить таблицу перед вставкой новых данных
+
+                    // Для каждого элемента создаём строку таблицы
+                    data.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${item.id}</td>
+                            <td>${item.co}</td>
+                            <td>${item.coitem}</td>
+                            <td>${item.item_details}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Ошибка при получении данных:', error);
+                });
+        }
+
+        // Вызов функции получения данных при загрузке страницы
+        window.onload = fetchItems;
+    </script>
+</body>
+</html>
